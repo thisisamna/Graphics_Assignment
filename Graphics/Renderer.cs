@@ -48,11 +48,14 @@ namespace Graphics
             sh = new Shader(projectPath + "\\Shaders\\SimpleVertexShader.vertexshader", projectPath + "\\Shaders\\SimpleFragmentShader.fragmentshader");
             Gl.glClearColor(0, 0, 0.4f, 1);
             
-            float[] triangleVertices= { 
+            float[] triangleVertices = { 
 		        // T1
-		        5.0f,  0.0f, -5.0f, 1.0f, 0.0f, 0.0f,
-	            15.0f, 0.0f, -5.0f, 0.0f, 1.0f, 0.0f,
-		        10f,  21.0f, -5.0f, 0.0f, 0.0f, 1.0f,  //B
+		        0.0f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+	            0.0f, 5.0f, 0.0f, 1.0f, 1.0f, 0.0f,
+                5.0f,  5.0f, 0.0f, 0.0f, 1.0f, 0.0f,  //B
+		        5.0f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //B
+
+
             }; // Triangle Center = (10, 7, -5)
             
             triangleCenter = new vec3(10, 7, -5);
@@ -132,7 +135,7 @@ namespace Graphics
             Gl.glEnableVertexAttribArray(1);
             Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
 
-            Gl.glDrawArrays(Gl.GL_TRIANGLES, 0, 3);
+            Gl.glDrawArrays(Gl.GL_POLYGON, 0, 4);
 
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
