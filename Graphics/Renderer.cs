@@ -40,7 +40,7 @@ namespace Graphics
 
         Stopwatch timer = Stopwatch.StartNew();
 
-        vec3 squareCenter;
+        vec3 square1Center;
 
         public void Initialize()
         {
@@ -48,17 +48,17 @@ namespace Graphics
             sh = new Shader(projectPath + "\\Shaders\\SimpleVertexShader.vertexshader", projectPath + "\\Shaders\\SimpleFragmentShader.fragmentshader");
             Gl.glClearColor(0, 0, 0.4f, 1);
             
-            float[] squareVertices = { 
+            float[] square1Vertices = { 
 		        // T1
-		        0.0f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-	            0.0f, 5.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-                5.0f,  5.0f, 0.0f, 0.0f, 1.0f, 0.0f,  //B
-		        5.0f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //B
+		        -10.0f,  -10.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+	            -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 0.0f,
+                10.0f,  10.0f, 0.0f, 0.0f, 1.0f, 0.0f,  //B
+		        10.0f,  -10.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //B
 
 
             }; // Triangle Center = (10, 7, -5)
             
-            squareCenter = new vec3(2.5f, 2.5f, 0.0f);
+            square1Center = new vec3(0.0f, 0.0f, 0.0f);
 
             float[] xyzAxesVertices = {
 		        //x
@@ -73,7 +73,7 @@ namespace Graphics
             };
 
 
-            triangleBufferID = GPU.GenerateBuffer(squareVertices);
+            triangleBufferID = GPU.GenerateBuffer(square1Vertices);
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
 
             // View matrix 
@@ -149,9 +149,9 @@ namespace Graphics
             rotationAngle += deltaTime * rotationSpeed;
 
             List<mat4> transformations = new List<mat4>();
-            transformations.Add(glm.translate(new mat4(1), -1 * squareCenter));
+            transformations.Add(glm.translate(new mat4(1), -1 * square1Center));
             transformations.Add(glm.rotate(rotationAngle, new vec3(0, 0, 1)));
-            transformations.Add(glm.translate(new mat4(1),  squareCenter));
+            transformations.Add(glm.translate(new mat4(1),  square1Center));
             transformations.Add(glm.translate(new mat4(1), new vec3(translationX, translationY, translationZ)));
 
             ModelMatrix =  MathHelper.MultiplyMatrices(transformations);
