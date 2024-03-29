@@ -40,7 +40,7 @@ namespace Graphics
 
         Stopwatch timer = Stopwatch.StartNew();
 
-        vec3 triangleCenter;
+        vec3 squareCenter;
 
         public void Initialize()
         {
@@ -48,7 +48,7 @@ namespace Graphics
             sh = new Shader(projectPath + "\\Shaders\\SimpleVertexShader.vertexshader", projectPath + "\\Shaders\\SimpleFragmentShader.fragmentshader");
             Gl.glClearColor(0, 0, 0.4f, 1);
             
-            float[] triangleVertices = { 
+            float[] squareVertices = { 
 		        // T1
 		        0.0f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 	            0.0f, 5.0f, 0.0f, 1.0f, 1.0f, 0.0f,
@@ -58,7 +58,7 @@ namespace Graphics
 
             }; // Triangle Center = (10, 7, -5)
             
-            triangleCenter = new vec3(10, 7, -5);
+            squareCenter = new vec3(10, 7, -5);
 
             float[] xyzAxesVertices = {
 		        //x
@@ -73,7 +73,7 @@ namespace Graphics
             };
 
 
-            triangleBufferID = GPU.GenerateBuffer(triangleVertices);
+            triangleBufferID = GPU.GenerateBuffer(squareVertices);
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
 
             // View matrix 
@@ -149,9 +149,9 @@ namespace Graphics
             rotationAngle += deltaTime * rotationSpeed;
 
             List<mat4> transformations = new List<mat4>();
-            transformations.Add(glm.translate(new mat4(1), -1 * triangleCenter));
+            transformations.Add(glm.translate(new mat4(1), -1 * squareCenter));
             transformations.Add(glm.rotate(rotationAngle, new vec3(0, 0, 1)));
-            transformations.Add(glm.translate(new mat4(1),  triangleCenter));
+            transformations.Add(glm.translate(new mat4(1),  squareCenter));
             transformations.Add(glm.translate(new mat4(1), new vec3(translationX, translationY, translationZ)));
 
             ModelMatrix =  MathHelper.MultiplyMatrices(transformations);
