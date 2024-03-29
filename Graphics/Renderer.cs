@@ -20,6 +20,8 @@ namespace Graphics
         Shader sh;
         
         uint square1BufferID;
+        uint square2BufferID;
+
         uint xyzAxesBufferID;
 
         //3D Drawing
@@ -41,6 +43,7 @@ namespace Graphics
         Stopwatch timer = Stopwatch.StartNew();
 
         vec3 square1Center;
+        vec3 square2Center;
 
         public void Initialize()
         {
@@ -60,6 +63,19 @@ namespace Graphics
             
             square1Center = new vec3(0.0f, 0.0f, 0.0f);
 
+            float[] square2Vertices = { 
+		        // T1
+		        -10.0f,  -10.0f, -20.0f, 1.0f, 0.0f, 1.0f,
+                -10.0f, 10.0f, -20.0f, 1.0f, 1.0f, 0.0f,
+                10.0f,  10.0f, -20.0f, 0.0f, 1.0f, 0.0f,  //B
+		        10.0f,  -10.0f, -20.0f, 0.0f, 1.0f, 1.0f,  //B
+
+
+            }; // Triangle Center = (10, 7, -5)
+
+            square2Center = new vec3(0.0f, 0.0f, 0.0f);
+
+
             float[] xyzAxesVertices = {
 		        //x
 		        -100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
@@ -74,6 +90,8 @@ namespace Graphics
 
 
             square1BufferID = GPU.GenerateBuffer(square1Vertices);
+            square2BufferID = GPU.GenerateBuffer(square2Vertices);
+
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
 
             // View matrix 
@@ -125,7 +143,23 @@ namespace Graphics
 
             #endregion
 
-            #region Animated Triangle
+            #region Animated Square 2
+            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, square2BufferID);
+
+            Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
+
+            Gl.glEnableVertexAttribArray(0);
+            Gl.glVertexAttribPointer(0, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)0);
+            Gl.glEnableVertexAttribArray(1);
+            Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
+
+            Gl.glDrawArrays(Gl.GL_POLYGON, 0, 4);
+
+            Gl.glDisableVertexAttribArray(0);
+            Gl.glDisableVertexAttribArray(1);
+            #endregion
+
+            #region Animated Square1
             Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, square1BufferID);
 
             Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
@@ -140,8 +174,10 @@ namespace Graphics
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
             #endregion
+
+
         }
-        
+
         public void Update()
         {
             timer.Stop();
