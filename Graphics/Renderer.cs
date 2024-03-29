@@ -58,7 +58,7 @@ namespace Graphics
 
             }; // Triangle Center = (10, 7, -5)
             
-            squareCenter = new vec3(10, 7, -5);
+            squareCenter = new vec3(2.5f, 2.5f, 0.0f);
 
             float[] xyzAxesVertices = {
 		        //x
