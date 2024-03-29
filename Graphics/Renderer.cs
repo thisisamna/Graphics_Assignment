@@ -19,7 +19,7 @@ namespace Graphics
     {
         Shader sh;
         
-        uint triangleBufferID;
+        uint square1BufferID;
         uint xyzAxesBufferID;
 
         //3D Drawing
@@ -62,18 +62,18 @@ namespace Graphics
 
             float[] xyzAxesVertices = {
 		        //x
-		        0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
+		        -100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
 		        100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
 		        //y
-	            0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, //G
+	            0.0f, -100.0f, 0.0f, 0.0f, 1.0f, 0.0f, //G
 		        0.0f, 100.0f, 0.0f, 0.0f, 1.0f, 0.0f, //G
 		        //z
-	            0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,  //B
-		        0.0f, 0.0f, -100.0f, 0.0f, 0.0f, 1.0f,  //B
+	            0.0f, 0.0f, -100.0f, 0.0f, 0.0f, 1.0f,  //B
+		        0.0f, 0.0f, 100.0f, 0.0f, 0.0f, 1.0f,  //B
             };
 
 
-            triangleBufferID = GPU.GenerateBuffer(square1Vertices);
+            square1BufferID = GPU.GenerateBuffer(square1Vertices);
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
 
             // View matrix 
@@ -126,7 +126,7 @@ namespace Graphics
             #endregion
 
             #region Animated Triangle
-            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, triangleBufferID);
+            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, square1BufferID);
 
             Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
 
