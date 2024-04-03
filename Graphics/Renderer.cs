@@ -98,7 +98,7 @@ namespace Graphics
             ViewMatrix = glm.lookAt(
                         new vec3(50, 50, 50), // Camera is at (0,5,5), in World Space
                         new vec3(0, 0, 0), // and looks at the origin
-                        new vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+                        new vec3(0, 0, 1)  // Head is up (set to 0,-1,0 to look upside-down)
                 );
             // Model Matrix Initialization
             ModelMatrix = new mat4(1);
