@@ -21,7 +21,7 @@ namespace Graphics
         
         uint square1BufferID;
         uint square2BufferID;
-
+        uint cubeID;
         uint xyzAxesBufferID;
 
         //3D Drawing
@@ -75,6 +75,116 @@ namespace Graphics
 
             square2Center = new vec3(0.0f, 0.0f, 0.0f);
 
+            float[] cubeVertices =
+            {
+                10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, 10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                -10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, 10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+
+                10.0f, -10.0f, -10.0f,
+                0.5f, 0.4f, 0.7f,
+                            };
 
             float[] xyzAxesVertices = {
 		        //x
@@ -91,9 +201,9 @@ namespace Graphics
 
             square1BufferID = GPU.GenerateBuffer(square1Vertices);
             square2BufferID = GPU.GenerateBuffer(square2Vertices);
-
+            cubeID = GPU.GenerateBuffer(cubeVertices);
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
-
+            
             // View matrix 
             ViewMatrix = glm.lookAt(
                         new vec3(50, 50, 50), // Camera is at (0,5,5), in World Space
@@ -174,6 +284,22 @@ namespace Graphics
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
             #endregion
+            #region Weird cube
+            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, cubeID);
+
+            Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
+
+            Gl.glEnableVertexAttribArray(0);
+            Gl.glVertexAttribPointer(0, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)0);
+            Gl.glEnableVertexAttribArray(1);
+            Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
+
+            Gl.glDrawArrays(Gl.GL_QUADS, 0, 30);
+
+            Gl.glDisableVertexAttribArray(0);
+            Gl.glDisableVertexAttribArray(1);
+            #endregion
+
 
 
         }
