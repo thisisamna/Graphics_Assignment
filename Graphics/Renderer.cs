@@ -19,7 +19,7 @@ namespace Graphics
     {
         Shader sh;
         
-        uint square1BufferID;
+        uint lidBufferID;
         uint floorBufferID;
         uint boxID;
         uint xyzAxesBufferID;
@@ -42,7 +42,7 @@ namespace Graphics
 
         Stopwatch timer = Stopwatch.StartNew();
 
-        vec3 square1Center;
+        vec3 lidCenter;
         vec3 floorCenter;
 
         public void Initialize()
@@ -50,18 +50,31 @@ namespace Graphics
             string projectPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             sh = new Shader(projectPath + "\\Shaders\\SimpleVertexShader.vertexshader", projectPath + "\\Shaders\\SimpleFragmentShader.fragmentshader");
             Gl.glClearColor(0, 0, 0.4f, 1);
-            
-            float[] square1Vertices = { 
-		        // T1
-		        -10.0f,  -10.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-	            -10.0f, 10.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-                10.0f,  10.0f, 0.0f, 0.0f, 1.0f, 0.0f,  //B
-		        10.0f,  -10.0f, 0.0f, 0.0f, 1.0f, 1.0f,  //B
 
+            float[] lidVertices = { 
+		        // front
+		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
+                -10.0f, 10.0f, 10.0f, 1.0f, 1.0f, 1.0f,
+                10.0f,  10.0f, 10.0f, 1.0f, 1.0f, 1.0f,  
 
-            }; // Triangle Center = (10, 7, -5)
-            
-            square1Center = new vec3(0.0f, 0.0f, 0.0f);
+                //back
+		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
+                 - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
+                 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
+
+                 //left
+		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
+                -10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,
+                 - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
+
+                 //right
+		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
+                10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,
+                10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
+
+            };// Triangle Center = (10, 7, -5)
+
+            lidCenter = new vec3(0.0f, 0.0f, 0.0f);
 
             float[] floorVertices = { 
 		        // T1
@@ -76,115 +89,37 @@ namespace Graphics
             floorCenter = new vec3(0.0f, 0.0f, 0.0f);
 
             float[] boxVertices =
-            {
-                //10.0f, 10.0f, -10.0f,
-                //0.5f, 0.4f, 0.7f,
+                {
+-10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 1 (Front Top-Left)
+10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 2 (Front Top-Right)
+10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 3 (Front Bottom-Right)
+- 10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 4 (Front Bottom-Left)
 
-                //-10.0f, 10.0f, 10.0f,
-                //0.5f, 0.4f, 0.7f,
+ - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 5 (Back Top-Left)
+10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 6 (Back Top-Right)
+10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 7 (Back Bottom-Right)
+- 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 8 (Back Bottom-Left)
 
-                //-10.0f, 10.0f, -10.0f,
-                //0.5f, 0.4f, 0.7f,
+ - 10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 9 (Left Top-Front) - Repeated for clarity
+  - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 10 (Left Top-Back)
+   - 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 11 (Left Bottom-Back)
+    - 10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 12 (Left Bottom-Front)
 
-                //10.0f, 10.0f, -10.0f,
-                //0.5f, 0.4f, 0.7f,
+10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 13 (Right Top-Front) - Repeated for clarity
+10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 14 (Right Top-Back)
+10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 15 (Right Bottom-Back)
+10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f  ,// Vertex 16 (Right Bottom-Front)
 
-                -10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
+- 10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f  ,// Vertex 17 (Top Front-Left) - Repeated for clarity
+ - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f , // Vertex 18 (Top Back-Left)
+10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,// Vertex 19 (Top Back-Right)
+10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 20 (Top Front-Right)
 
-                10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, 10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                -10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, 10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-
-                10.0f, -10.0f, -10.0f,
-                0.5f, 0.4f, 0.7f,
-                            };
+-10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 21 (Bottom Front-Right)
+-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f, // Vertex 22 (Bottom Back-Right)
+10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 23 (Bottom Back-Left)
+10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 24 (Bottom Front-Left)
+};
 
             float[] xyzAxesVertices = {
 		        //x
@@ -199,7 +134,7 @@ namespace Graphics
             };
 
 
-            square1BufferID = GPU.GenerateBuffer(square1Vertices);
+            lidBufferID = GPU.GenerateBuffer(lidVertices);
             floorBufferID = GPU.GenerateBuffer(floorVertices);
             boxID = GPU.GenerateBuffer(boxVertices);
             xyzAxesBufferID = GPU.GenerateBuffer(xyzAxesVertices);
@@ -269,8 +204,8 @@ namespace Graphics
             Gl.glDisableVertexAttribArray(1);
             #endregion
 
-            #region Animated Square1
-            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, square1BufferID);
+            #region Animated lid
+            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, lidBufferID);
 
             Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
 
@@ -279,7 +214,7 @@ namespace Graphics
             Gl.glEnableVertexAttribArray(1);
             Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
 
-            Gl.glDrawArrays(Gl.GL_POLYGON, 0, 4);
+            Gl.glDrawArrays(Gl.GL_TRIANGLES, 0, 12);
 
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
@@ -311,9 +246,9 @@ namespace Graphics
             rotationAngle += deltaTime * rotationSpeed;
 
             List<mat4> transformations = new List<mat4>();
-            transformations.Add(glm.translate(new mat4(1), -1 * square1Center));
+            transformations.Add(glm.translate(new mat4(1), -1 * lidCenter));
             transformations.Add(glm.rotate(rotationAngle, new vec3(0, 0, 1)));
-            transformations.Add(glm.translate(new mat4(1),  square1Center));
+            transformations.Add(glm.translate(new mat4(1),  lidCenter));
             transformations.Add(glm.translate(new mat4(1), new vec3(translationX, translationY, translationZ)));
 
             ModelMatrix =  MathHelper.MultiplyMatrices(transformations);
