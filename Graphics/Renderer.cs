@@ -55,26 +55,22 @@ namespace Graphics
 
             float[] lidVertices = { 
 		        // front
-		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
-                -10.0f, 10.0f, 10.0f, 1.0f, 1.0f, 1.0f,
-                10.0f,  10.0f, 10.0f, 1.0f, 1.0f, 1.0f,  
-
+		        0.0f, 20.0f, 20.0f, 1.0f, 1.0f, 1.0f,
+-10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f,
+ 10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f, 
                 //back
-		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
-                 - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
-                 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
-
+		        0.0f, -20.0f, 20.0f, 1.0f, 1.0f, 1.0f,
+                 10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f,
+                  -10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f, 
                  //left
-		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
-                -10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,
-                 - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
-
+		        -20.0f, 0.0f, 20.0f, 1.0f, 1.0f, 1.0f,
+-10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f,
+ -10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f, 
                  //right
-		        0.0f, 20.0f, 25.0f, 1.0f, 1.0f, 1.0f,
-                10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,
-                10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,
-
-            };// Triangle Center = (10, 7, -5)
+		        20.0f, 0.0f, 20.0f, 1.0f, 1.0f, 1.0f,
+ 10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f,
+  10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f,
+    };// Triangle Center = (10, 7, -5)
 
             lidCenter = new vec3(0.0f, 0.0f, 0.0f);
 
@@ -99,10 +95,10 @@ namespace Graphics
  -10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 4 (Bottom-Left)
 
 // Bottom Face (Negative Z)
--10.0f,  10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 5 (Top-Left)
- 10.0f,  10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 6 (Top-Right)
- 10.0f, -10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 7 (Bottom-Right)
- -10.0f, -10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 8 (Bottom-Left)
+-10.0f,  10.0f, -10.0f,  0.5f, 0.4f, 0.7f,  // Vertex 5 (Top-Left)
+ 10.0f,  10.0f, -10.0f,  0.5f, 0.4f, 0.7f,  // Vertex 6 (Top-Right)
+ 10.0f, -10.0f, -10.0f,  0.5f, 0.4f, 0.7f,  // Vertex 7 (Bottom-Right)
+ -10.0f, -10.0f, -10.0f,  0.5f, 0.4f, 0.7f,  // Vertex 8 (Bottom-Left)
 
 // Left Face (Negative X)
 -10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 9 (Top-Front) - Repeated for clarity
