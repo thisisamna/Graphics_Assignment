@@ -50,6 +50,8 @@ namespace Graphics
             string projectPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             sh = new Shader(projectPath + "\\Shaders\\SimpleVertexShader.vertexshader", projectPath + "\\Shaders\\SimpleFragmentShader.fragmentshader");
             Gl.glClearColor(0, 0, 0.4f, 1);
+            Gl.glEnable(Gl.GL_DEPTH_TEST);
+
 
             float[] lidVertices = { 
 		        // front
@@ -168,7 +170,6 @@ namespace Graphics
 
             Gl.glUniformMatrix4fv(ShaderViewMatrixID, 1, Gl.GL_FALSE, ViewMatrix.to_array());
             Gl.glUniformMatrix4fv(ShaderProjectionMatrixID, 1, Gl.GL_FALSE, ProjectionMatrix.to_array());
-
             timer.Start();
         }
 
@@ -176,7 +177,7 @@ namespace Graphics
         {
             sh.UseShader();
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
-
+            Gl.glClear(Gl.GL_DEPTH_BUFFER_BIT);
             #region XYZ axis
             Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, xyzAxesBufferID);
 
