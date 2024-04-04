@@ -90,35 +90,41 @@ namespace Graphics
 
             float[] boxVertices =
                 {
--10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 1 (Front Top-Left)
-10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 2 (Front Top-Right)
-10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 3 (Front Bottom-Right)
-- 10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 4 (Front Bottom-Left)
+// Front Face (Positive Z)
+-10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 1 (Top-Left)
+ 10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 2 (Top-Right)
+ 10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 3 (Bottom-Right)
+ -10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 4 (Bottom-Left)
 
- - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 5 (Back Top-Left)
-10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 6 (Back Top-Right)
-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 7 (Back Bottom-Right)
-- 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 8 (Back Bottom-Left)
+// Back Face (Negative Z)
+-10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 5 (Top-Left)
+ 10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 6 (Top-Right)
+ 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 7 (Bottom-Right)
+ -10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 8 (Bottom-Left)
 
- - 10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 9 (Left Top-Front) - Repeated for clarity
-  - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 10 (Left Top-Back)
-   - 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 11 (Left Bottom-Back)
-    - 10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 12 (Left Bottom-Front)
+// Left Face (Negative X)
+-10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 9 (Top-Front) - Repeated for clarity
+-10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 10 (Top-Back)
+-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 11 (Bottom-Back)
+-10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 12 (Bottom-Front)
 
-10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 13 (Right Top-Front) - Repeated for clarity
-10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 14 (Right Top-Back)
-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 15 (Right Bottom-Back)
-10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f  ,// Vertex 16 (Right Bottom-Front)
+// Right Face (Positive X)
+ 10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 13 (Top-Front) - Repeated for clarity
+ 10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 14 (Top-Back)
+ 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 15 (Bottom-Back)
+ 10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 16 (Bottom-Front)
 
-- 10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f  ,// Vertex 17 (Top Front-Left) - Repeated for clarity
- - 10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f , // Vertex 18 (Top Back-Left)
-10.0f, 10.0f, -10.0f, 0.5f, 0.4f, 0.7f,// Vertex 19 (Top Back-Right)
-10.0f, 10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 20 (Top Front-Right)
+// Top Face (Positive Y)
+-10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 17 (Front-Left) - Repeated for clarity
+-10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 18 (Back-Left)
+ 10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f, // Vertex 19
+ 10.0f,  10.0f, 10.0f, 0.5f, 0.4f, 0.7f, // Vertex 20
 
--10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 21 (Bottom Front-Right)
--10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f, // Vertex 22 (Bottom Back-Right)
-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 23 (Bottom Back-Left)
-10.0f, -10.0f, 10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 24 (Bottom Front-Left)
+ // Bottom Face (Negative Y)
+-10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 21 (Front-Right) (Y is negative for bottom)
+-10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 22 (Back-Right)
+ 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 23 (Back-Left)
+ 10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 24 (Front-Left)
 };
 
             float[] xyzAxesVertices = {
