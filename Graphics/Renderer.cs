@@ -206,6 +206,8 @@ namespace Graphics
             #endregion
 
             #region Animated Square 2
+            Gl.glClear(Gl.GL_DEPTH_BUFFER_BIT);
+
             Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, floorBufferID);
 
             Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
@@ -221,22 +223,9 @@ namespace Graphics
             Gl.glDisableVertexAttribArray(1);
             #endregion
 
-            #region Animated lid
-            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, lidBufferID);
-
-            Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
-
-            Gl.glEnableVertexAttribArray(0);
-            Gl.glVertexAttribPointer(0, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)0);
-            Gl.glEnableVertexAttribArray(1);
-            Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
-
-            Gl.glDrawArrays(Gl.GL_TRIANGLES, 0, 12);
-
-            Gl.glDisableVertexAttribArray(0);
-            Gl.glDisableVertexAttribArray(1);
-            #endregion
             #region Weird box
+            Gl.glClear(Gl.GL_DEPTH_BUFFER_BIT);
+
             Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, boxID);
 
             Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
@@ -247,6 +236,23 @@ namespace Graphics
             Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
 
             Gl.glDrawArrays(Gl.GL_QUADS, 0, 28);
+
+            Gl.glDisableVertexAttribArray(0);
+            Gl.glDisableVertexAttribArray(1);
+            #endregion
+            #region Animated lid
+            Gl.glClear(Gl.GL_DEPTH_BUFFER_BIT);
+
+            Gl.glBindBuffer(Gl.GL_ARRAY_BUFFER, lidBufferID);
+
+            Gl.glUniformMatrix4fv(ShaderModelMatrixID, 1, Gl.GL_FALSE, ModelMatrix.to_array());
+
+            Gl.glEnableVertexAttribArray(0);
+            Gl.glVertexAttribPointer(0, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)0);
+            Gl.glEnableVertexAttribArray(1);
+            Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
+
+            Gl.glDrawArrays(Gl.GL_TRIANGLES, 0, 12);
 
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
