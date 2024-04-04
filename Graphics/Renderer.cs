@@ -135,12 +135,20 @@ namespace Graphics
 		        //x
 		        -100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
 		        100.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //R
+
 		        //y
 	            0.0f, -100.0f, 0.0f, 0.0f, 1.0f, 0.0f, //G
 		        0.0f, 100.0f, 0.0f, 0.0f, 1.0f, 0.0f, //G
-		        //z
-	            0.0f, 0.0f, -100.0f, 0.0f, 0.0f, 1.0f,  //B
-		        0.0f, 0.0f, 100.0f, 0.0f, 0.0f, 1.0f,  //B
+		        //diag1
+		        -100.0f, 100.0f, 0.0f, 1.0f, 1.0f, 0.0f, //R
+		        100.0f, -100.0f, 0.0f, 1.0f, 1.0f, 0.0f, //R
+                //diag1
+		        0.0f, -100.0f, 100.0f, 0.0f, 1.0f, 1.0f, //R
+		        0.0f, 100.0f, -100.0f, 0.0f, 1.0f, 1.0f, //R
+                //diag3
+		        -100.0f, 0.0f, 100.0f, 0.0f, 1.0f, 1.0f, //R
+		        100.0f, 0.0f, -100.0f, 0.0f, 1.0f, 1.0f, //R
+
             };
 
 
@@ -190,7 +198,7 @@ namespace Graphics
             Gl.glEnableVertexAttribArray(1);
             Gl.glVertexAttribPointer(1, 3, Gl.GL_FLOAT, Gl.GL_FALSE, 6 * sizeof(float), (IntPtr)(3 * sizeof(float)));
              
-            Gl.glDrawArrays(Gl.GL_LINES, 0, 6);
+            Gl.glDrawArrays(Gl.GL_LINES, 0, 10);
 
             Gl.glDisableVertexAttribArray(0);
             Gl.glDisableVertexAttribArray(1);
