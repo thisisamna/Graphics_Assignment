@@ -90,17 +90,17 @@ namespace Graphics
 
             float[] boxVertices =
                 {
-// Front Face (Positive Z)
--10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 1 (Top-Left)
- 10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 2 (Top-Right)
- 10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 3 (Bottom-Right)
- -10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 4 (Bottom-Left)
+// Top Face (Positive Z)
+-10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 1 (Top-Left)
+ 10.0f,  10.0f,  10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 2 (Top-Right)
+ 10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 3 (Bottom-Right)
+ -10.0f, -10.0f,  10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 4 (Bottom-Left)
 
-// Back Face (Negative Z)
--10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 5 (Top-Left)
- 10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 6 (Top-Right)
- 10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 7 (Bottom-Right)
- -10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 8 (Bottom-Left)
+// Bottom Face (Negative Z)
+-10.0f,  10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 5 (Top-Left)
+ 10.0f,  10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 6 (Top-Right)
+ 10.0f, -10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 7 (Bottom-Right)
+ -10.0f, -10.0f, -10.0f,  0.0f, 0.0f, 0.0f,  // Vertex 8 (Bottom-Left)
 
 // Left Face (Negative X)
 -10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 9 (Top-Front) - Repeated for clarity
@@ -114,13 +114,13 @@ namespace Graphics
  10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 15 (Bottom-Back)
  10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 16 (Bottom-Front)
 
-// Top Face (Positive Y)
+// Front Face (Positive Y)
 -10.0f,  10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 17 (Front-Left) - Repeated for clarity
 -10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 18 (Back-Left)
  10.0f,  10.0f, -10.0f, 0.5f, 0.4f, 0.7f, // Vertex 19
  10.0f,  10.0f, 10.0f, 0.5f, 0.4f, 0.7f, // Vertex 20
 
- // Bottom Face (Negative Y)
+ // Back Face (Negative Y)
 -10.0f, -10.0f,  10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 21 (Front-Right) (Y is negative for bottom)
 -10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 22 (Back-Right)
  10.0f, -10.0f, -10.0f, 0.5f, 0.4f, 0.7f,  // Vertex 23 (Back-Left)
